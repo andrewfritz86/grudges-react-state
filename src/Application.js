@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useCallback } from 'react';
 
 import id from 'uuid/v4';
 
@@ -15,13 +15,12 @@ const reducer = (state, action) => {
     return [action.payload, ...state];
   }
   if (action.type === TOGGLE_FORGIVENESS) {
-    const grudges = state.map((grudge) => {
+    return state.map((grudge) => {
       if (grudge.id === action.payload) {
-        grudge.forgiven = !grudge.forgiven;
+        return { ...grudge, forgiven: !grudge.forgiven };
       }
       return grudge;
     });
-    return [...grudges];
   }
   return state;
 };
@@ -29,19 +28,25 @@ const reducer = (state, action) => {
 const Application = () => {
   const [grudges, dispatch] = useReducer(reducer, initialState);
 
-  const addGrudge = ({ person, reason }) => {
-    dispatch({
-      type: GRUDGE_ADD,
-      payload: { id: id(), forgiven: false, person, reason }
-    });
-  };
+  const addGrudge = useCallback(
+    ({ person, reason }) => {
+      dispatch({
+        type: GRUDGE_ADD,
+        payload: { id: id(), forgiven: false, person, reason }
+      });
+    },
+    [dispatch]
+  );
 
-  const toggleForgiveness = (id) => {
-    dispatch({
-      type: TOGGLE_FORGIVENESS,
-      payload: id
-    });
-  };
+  const toggleForgiveness = useCallback(
+    (id) => {
+      dispatch({
+        type: TOGGLE_FORGIVENESS,
+        payload: id
+      });
+    },
+    [dispatch]
+  );
 
   return (
     <div className="Application">

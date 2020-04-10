@@ -4,6 +4,10 @@
 - Different than primitives, which JS reconizes as completely different
 - Good point about keeping some component state lower down the tree as it won't force re-renders of the whole tree. Only send changes up the tree that need to be persisted through the app.
 
+- React.memo -> wrap a functional component such that React will check it's props before re-rendering. Don't use this willy nilly, as using it causes react to always check. If you know props are going to change all the time, don't bother, because it will run the extra check.
+
+- useCallback hook lets React "save" functional component properties so that they aren't recreated on each render (function call) - this lets memoized components avoid a re-render.
+
 # Grudges (Frontend Masters: React State)
 
 We're starting out with a basic version of an application that uses hooks to manage state.
