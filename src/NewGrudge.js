@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { GrudgeContext } from './GrudgeContext';
 
 const NewGrudge = React.memo(({ onSubmit }) => {
+  const { addGrudge } = React.useContext(GrudgeContext);
   const [person, setPerson] = useState('');
   const [reason, setReason] = useState('');
 
   const handleChange = (event) => {
     event.preventDefault();
-    onSubmit({ person, reason });
+    addGrudge({ person, reason });
   };
 
   console.log('rendering new grudge form');

@@ -4,7 +4,7 @@ import id from 'uuid/v4';
 import initialState from './initialState';
 
 // Create context returns and object with Provider and Consumer properties
-const GrudgeContext = createContext();
+export const GrudgeContext = createContext();
 
 const GRUDGE_ADD = 'GRUDGE_ADD';
 const TOGGLE_FORGIVENESS = 'TOGGLE_FORGIVENESS';

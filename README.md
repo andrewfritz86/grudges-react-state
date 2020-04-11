@@ -8,6 +8,10 @@
 
 - useCallback hook lets React "save" functional component properties so that they aren't recreated on each render (function call) - this lets memoized components avoid a re-render.
 
+- Interesting performance tradeoff by bringing in context - memoization/useCallback fails
+
+- Testing components becomes a pain in the ass with Context
+
 # Grudges (Frontend Masters: React State)
 
 We're starting out with a basic version of an application that uses hooks to manage state.
